@@ -1,0 +1,54 @@
+#[data]
+TYPE_MS2=mgf
+PATH_MS2=E:\raw\uaalink\BING_TRX2KR_DISULFIDE_LYSC_GLUC_REP1_20191101_HCDFT.mgf
+PATH_FASTA=E:\raw\uaalink\Ecoli_Affibody.fasta
+PATH_FASTA_EXPORT=E:\raw\uaalink\result_2\
+PATH_RESULT_EXPORT=E:\raw\uaalink\result_2\
+
+
+#[biology]
+NAME_ENZYME=trypsin KR C;gluC DE C # use ';' to set multiply enzymes
+TYPE_DIGEST=0 # 0 for specific; 1 for semi-specific; 2 for non-specific
+NUMBER_MAX_MISS_CLV=3
+
+NAME_MOD_FIX= # Carbamidomethyl[C] # use ";" to set multiply fixed modifications
+NAME_MOD_VAR=Oxidation[M];Carbamidomethyl[C] # use ";" to set multiply variable modifications
+NUMBER_MAX_MOD=3 # Maximum of variable modification in one peptide sequence (not consider the fixed modifications)
+
+UUA_SEQ=USGPAK
+UUA_AA=U
+UUA_LEN_LOW=4
+UUA_LEN_UP=100
+UUA_COM=C(12)H(16)Br(1)N(1)O(3) # 301.0313451 Da
+UUA_NAME_ENZYME=gluC DE C # use ';' to set multiply enzymes
+UUA_TYPE_DIGEST=0 # 0 for specific; 1 for semi-specific; 2 for non-specific
+UUA_NUMBER_MAX_MISS_CLV=0
+UUA_LINKED_AA=C # Beta peptide is linked with which amino acids in alpha peptide, it can be multiply amino acids (e.g., ACDEF)
+
+#[mass spectrometry]
+PPM_TOL_PRECURSOR=20ppm # ppm or Da, now it only supports ppm
+PPM_TOL_FRAGMENT=20ppm # ppm or Da, now it only supports ppm
+TYPE_ACTIVATION=HCD # HCD, CID or ETD, now it only supports HCD or CID
+
+#[performance]
+NUMBER_THREAD=10
+TYPE_THREAD=0 # 0 is for multi-process (high speed but use more memory); 1 is for multi-thread (low speed but use less memory)
+NUMBER_SELECT_PEAK=200
+LEN_MAX_PROTEIN=100000
+MASS_PEP_LOW=400
+MASS_PEP_UP=10000
+LEN_PEP_LOW=6
+LEN_PEP_UP=100
+INDEX_SPLIT_MASS=100 # create one pkl file for each 100Da ([0, 100], [100, 200], ..., [9900, 10000])
+NUMBER_TOP_RESULT=10 # output top-10 peptides for each spectrum
+
+MULTI_MASS=1000 # use mass hash (mass*MUTLI_MASS) to retrive peptide, spectrum or peak, this value of creating peptide index and searching mgf must be same.
+TYPE_TASK=0 # 0 is create peptide index for (fasta), search mgf files and computing fdr; 1 is only create peptide index; 2 is only search mgf files and computing fdr; 3 is only computing fdr
+
+#[filter]
+FDR_PSM=0.05
+
+#[ini]
+PATH_INI_ELEMENT=ini/element.ini
+PATH_INI_AA=ini/aa.ini
+PATH_INI_MOD=ini/modification.ini

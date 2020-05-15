@@ -1,0 +1,62 @@
+#[data]
+TYPE_MS2=mgf
+PATH_MS2=E:\raw\20200506_2237\
+PATH_FASTA=E:\raw\20200506_2237\Human_uniprot_2w_20200321(1).fasta
+PATH_FASTA_EXPORT=E:\raw\20200506_2237\ #VIP
+PATH_RESULT_EXPORT=E:\raw\20200506_2237\result\ #VIP
+
+#[biology]
+NAME_ENZYME=Lys-C K C;Glu-C DE C;Asp-N D N; #use ';' to set multiply enzymes
+TYPE_DIGEST=0 #0 for specific; 1 for semi-specific; 2 for non-specific
+NUMBER_MAX_MISS_CLV=6
+
+NAME_MOD_FIX=Carbamidomethyl[C]#VIP, use ';' to set multiply fixed modifications
+NAME_MOD_VAR=Oxidation[M]#VIP, use ';' to set multiply variable modifications
+NUMBER_MAX_MOD=3#Maximum of variable modification in one peptide sequence (not consider the fixed modifications)
+
+UAA_SEQ=RFDGQPINETDTPAQLEMEDEDTIDVFQQQTGU
+UAA_AA=U
+UAA_LEN_LOW=4
+UAA_LEN_UP=20
+UAA_NAME_MOD_FIX=Carbamidomethyl[C]
+UAA_NAME_MOD_VAR=
+UAA_COM=C(2)H(1)N(1) #VIP
+UAA_NAME_ENZYME=Lys-C K C;Glu-C DE C;Asp-N D N;
+UAA_TYPE_DIGEST=0 #0 for specific; 1 for semi-specific; 2 for non-specific
+UAA_NUMBER_MAX_MISS_CLV=2
+UAA_LINKED_AA=K #VIP, beta peptide is linked with which amino acids in alpha peptide, it can be multiply amino acids (e.g., ACDEF)
+
+#[mass spectrometry]
+PPM_TOL_PRECURSOR=20ppm
+PPM_TOL_FRAGMENT=20ppm
+TYPE_ACTIVATION=HCD
+
+#[performance]
+NUMBER_THREAD=2
+TYPE_THREAD=0 #0 is for multi-process (high speed but use more memory); 1 is for multi-thread (low speed but use less memory)
+NUMBER_SELECT_PEAK=200
+NUMBER_SPECTRUM=10000
+LEN_MAX_PROTEIN=100000
+MASS_PEP_LOW=400
+MASS_PEP_UP=10000
+LEN_PEP_LOW=6
+LEN_PEP_UP=100
+INDEX_SPLIT_MASS=100 #create one pkl file for each 100Da ([0, 100], [100, 200], ..., [9900, 10000])
+NUMBER_TOP_RESULT=10 #output top-10 peptides for each spectrum
+
+MULTI_MASS=1 #use mass hash (mass*MUTLI_MASS) to retrive peptide, spectrum or peak, this value of creating peptide index and searching mgf must be same.
+TYPE_TASK=3 #0 is create peptide index for (fasta), search mgf files, rerank results and computing fdr; 1 is only create peptide index;  2 is only search mgf files, rerank results and computing fdr; 3 is rerank results and computing fdr; 4 is only computing fdr
+TYPE_FILTER_BETA=1 #whether to filter spectrum which has not matched ion when matching with beta peptide (default is 1)
+NUMBER_PEAK_BETA=1 #when 'TYPE_FILTER_BETA' is set as 1, then this value is valid,  it will filter spectrum where the number of matched beta ions is less than 'NUMBER_PEAK_BETA' (default is 1)
+
+OPEN_SEARCH_SINGLE=0 # open search for single peptide (beta), 0 means it don't support open search while 1 means it supports
+MASS_WINDOW_BETA=300 #when open search only for single beta peptide, the mass window size of open search is 300 Da
+PATH_PFIND_RESULT= #path of pfind result file; if not exists, it can be empty
+
+#[filter]
+FDR_PSM=0.01
+
+#[ini]
+PATH_INI_ELEMENT=E:\raw\20200506_2237\ini\element.ini
+PATH_INI_AA=E:\raw\20200506_2237\ini\aa.ini
+PATH_INI_MOD=E:\raw\20200506_2237\ini\modification.ini

@@ -1,0 +1,1 @@
+pyinstaller --console --onefile Main.py
